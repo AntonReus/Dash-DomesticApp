@@ -1,0 +1,23 @@
+{
+  "name": "dash-domesticapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "postcss ./src/input.css -o ./public/css/main.css",
+    "build": "NODE_ENV=production postcss ./src/input.css -o ./public/css/main.css",
+    "dev": "nodemon -x npm run build:css -w src/input.css -w tailwind.config.js -w public/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.0.24"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.5",
+    "postcss-cli": "^9.1.0",
+    "win-node-env": "^0.6.1"
+  }
+}
