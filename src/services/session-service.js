@@ -1,15 +1,15 @@
-const token = "";
-const base_uri = "";
+import { BASE_URI } from "../../public/js/config.js";
 
-export async function updateNote(id)
+export default async function login(email, password)
 {
-    const response = await fetch(`${base_uri}/notes/${id}`, {
-        method: "PATCH",
+    const credentials = {email, password};
+
+    const response = await fetch(`${base_uri}/login`, {
+        method: "POST",
         headers: {
-            Autorization: `Token token = ${token}`,
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(credentials)
     });
 
     const data = await response.json();
