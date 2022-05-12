@@ -1,17 +1,21 @@
-import { BASE_URI } from "../../public/js/config.js";
+import { tokenKey } from "../Config";
+import apiFetch from "./api-fetch";
 
-export default async function login(email, password)
-{
-    const credentials = {email, password};
+export async function login(credentials) {
+  console.log(
+    "%c 🇮🇳: login -> credentials ",
+    "font-size:16px;background-color:#3b0230;color:white;",
+    credentials
+  );
+  const { token, ...user } = await apiFetch("login", {
+    body: credentials,
+  });
 
-    const response = await fetch(`${base_uri}/login`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(credentials)
-    });
+  sessionStorage.setItem(tokenKey, token);
+  return user;
+}
 
-    const data = await response.json();
-    return data;
+export async function logout() {
+  await apiFetch("logout", { method: "DELETE" });
+  sessionStorage.removeItem(tokenKey);
 }
